@@ -12,6 +12,6 @@ spec:
     helm:
       valueFiles:
       - values-staging.yaml
-    path: project/helm/nginx-deployment
+    path: project/helm
     repoURL: https://github.com/tonydev93/nd064_course_1
     targetRevision: HEAD
