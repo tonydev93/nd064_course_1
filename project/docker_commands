@@ -1,11 +1,41 @@
 ## Docker commands used to build the application 
 # TODO: insert the docker build command
+docker build -t techtrends .
 
 ## Docker commands used to run the application
 # TODO: insert the docker run command
+docker run -d -p 3111:3111 techtrends
 
 ## Docker commands used to get the application logs
 # TODO: insert the docker logs command
+docker logs 91212dce7504aca54d341181a18e1ea56481d1d2641cc4089a71affce93c61e5
 
 ## Logs from the container running the TechTrends application
 # TODO: paste logs from the Docker container 
+* Serving Flask app 'app' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+[2023-09-26 09:43:17,444] WARNING in _internal:  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+[2023-09-26 09:43:17,444] INFO in _internal:  * Running on http://172.17.0.2:3111/ (Press CTRL+C to quit)
+[2023-09-26 09:43:28,683] INFO in _internal: 172.17.0.1 - - [26/Sep/2023 09:43:28] "GET / HTTP/1.1" 200 -
+[2023-09-26 09:43:28,773] INFO in _internal: 172.17.0.1 - - [26/Sep/2023 09:43:28] "GET /static/css/main.css HTTP/1.1" 200 -
+[2023-09-26 09:43:28,865] INFO in _internal: 172.17.0.1 - - [26/Sep/2023 09:43:28] "GET /favicon.ico HTTP/1.1" 404 -
+[2023-09-26 09:43:32,934] INFO in app: Post title: CNCF Cloud Native Interactive Landscape
+[2023-09-26 09:43:32,962] INFO in _internal: 172.17.0.1 - - [26/Sep/2023 09:43:32] "GET /CNCF%20Cloud%20Native%20Interactive%20Landscape HTTP/1.1" 200 -
+[2023-09-26 09:43:32,976] INFO in _internal: 172.17.0.1 - - [26/Sep/2023 09:43:32] "GET /static/css/main.css HTTP/1.1" 304 -
+[2023-09-26 09:43:40,076] INFO in app: Post title: CNCF Cloud Native Definition v1.0
+[2023-09-26 09:43:40,077] INFO in _internal: 172.17.0.1 - - [26/Sep/2023 09:43:40] "GET /CNCF%20Cloud%20Native%20Definition%20v1.0 HTTP/1.1" 200 -
+[2023-09-26 09:43:40,091] INFO in _internal: 172.17.0.1 - - [26/Sep/2023 09:43:40] "GET /static/css/main.css HTTP/1.1" 304 -
+[2023-09-26 09:43:45,162] INFO in app: Post title: CNCF Cloud Native Definition v1.0
+[2023-09-26 09:43:45,165] INFO in _internal: 172.17.0.1 - - [26/Sep/2023 09:43:45] "GET /CNCF%20Cloud%20Native%20Definition%20v1.0 HTTP/1.1" 200 -
+[2023-09-26 09:43:45,189] INFO in _internal: 172.17.0.1 - - [26/Sep/2023 09:43:45] "GET /static/css/main.css HTTP/1.1" 304 -
+[2023-09-26 09:45:40,259] INFO in _internal: 172.17.0.1 - - [26/Sep/2023 09:45:40] "GET /create HTTP/1.1" 200 -
+[2023-09-26 09:45:40,277] INFO in _internal: 172.17.0.1 - - [26/Sep/2023 09:45:40] "GET /static/css/main.css HTTP/1.1" 304 -
+[2023-09-26 09:45:48,244] INFO in app: Post title created: Test
+[2023-09-26 09:45:48,246] INFO in _internal: 172.17.0.1 - - [26/Sep/2023 09:45:48] "POST /create HTTP/1.1" 302 -
+[2023-09-26 09:45:48,250] INFO in _internal: 172.17.0.1 - - [26/Sep/2023 09:45:48] "GET / HTTP/1.1" 200 -
+[2023-09-26 09:45:48,263] INFO in _internal: 172.17.0.1 - - [26/Sep/2023 09:45:48] "GET /static/css/main.css HTTP/1.1" 304 -
+

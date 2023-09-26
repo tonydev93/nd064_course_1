@@ -1,7 +1,24 @@
 import sqlite3
+from logging.config import dictConfig
 
+dictConfig({
+    'version': 1,
+    'formatters': {'default': {
+        'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
+    }},
+    'handlers': {'wsgi': {
+        'class': 'logging.StreamHandler',
+        'stream': 'ext://flask.logging.wsgi_errors_stream',
+        'formatter': 'default'
+    }},
+    'root': {
+        'level': 'INFO',
+        'handlers': ['wsgi']
+    }
+})
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
+
 
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
@@ -13,7 +30,7 @@ def get_db_connection():
 # Function to get a post using its ID
 def get_post(post_id):
     connection = get_db_connection()
-    post = connection.execute('SELECT * FROM posts WHERE id = ?',
+    post = connection.execute('SELECT * FROM posts WHERE title = ?',
                         (post_id,)).fetchone()
     connection.close()
     return post
@@ -32,12 +49,13 @@ def index():
 
 # Define how each individual article is rendered 
 # If the post ID is not found a 404 page is shown
-@app.route('/<int:post_id>')
+@app.route('/<post_id>')
 def post(post_id):
     post = get_post(post_id)
     if post is None:
       return render_template('404.html'), 404
     else:
+      app.logger.info('Post title: {}'.format(post['title']))
       return render_template('post.html', post=post)
 
 # Define the About Us page
@@ -60,11 +78,33 @@ def create():
                          (title, content))
             connection.commit()
             connection.close()
-
+            app.logger.info('Post title created: {}'.format(title))
             return redirect(url_for('index'))
 
     return render_template('create.html')
 
+@app.route('/status')
+def healthcheck():
+    response = app.response_class(
+            response=json.dumps({"result":"OK - healthy"}),
+            status=200,
+            mimetype='application/json'
+    )
+    app.logger.info('Status request successfull')
+    app.logger.debug('DEBUG message')
+    return response
+
+@app.route('/metrics')
+def metrics():
+    response = app.response_class(
+            response=json.dumps({"status":"success","code":0,"data":{"UserCount":140,"UserCountActive":23}}),
+            status=200,
+            mimetype='application/json'
+    )
+    app.logger.info('Metrics request successfull')
+    return response
+
+
 # start the application on port 3111
 if __name__ == "__main__":
-   app.run(host='0.0.0.0', port='3111')
+  app.run(host='0.0.0.0', port='3111')
